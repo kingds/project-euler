@@ -1,4 +1,4 @@
-# Smallest number even divisible by all numbers between 1 and 20
+# What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
 # Create the list of divisors
 divisor_list = range(2, 21)

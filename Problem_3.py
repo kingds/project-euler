@@ -1,15 +1,31 @@
-
+# What is the largest prime factor of the number 600851475143 ?
 
 n = 600851475143
-factors = []
-i = 2
+primes = [2]
+
+def is_prime(number):
+	if number % 2 == 0:
+		return False
+	else:
+		i = 3
+		while i < number/2:
+			if number % i == 0:
+				return False
+			i += 2
+	return True
+
+divisor = 3
 
 while True:
-	if n%i == 0:
-		print i
+	if is_prime(divisor):
+		if n % divisor == 0:
+			n = n / divisor
+			if n == 1:
+				break
+			factor = n
+	divisor += 2
 
-	i += 1
-
+print factor
 	
 
 

@@ -1,3 +1,5 @@
+# Find the largest palindrome made from the product of two 3-digit numbers.
+
 a = 999
 b = 999
 palindrome = 0

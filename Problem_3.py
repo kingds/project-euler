@@ -4,6 +4,8 @@ n = 600851475143
 primes = [2]
 
 def is_prime(number):
+	if number == 2:
+		return True
 	if number % 2 == 0:
 		return False
 	else:

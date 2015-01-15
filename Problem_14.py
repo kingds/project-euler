@@ -15,7 +15,7 @@ max_length = 0
 max_starting_value = 0
 
 for i in range(1, 1000000):
-	print i
+	# print i
 	chain = create_chain(i)
 	if len(chain) > max_length:
 		max_length = len(chain)

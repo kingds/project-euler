@@ -21,4 +21,19 @@ def primes_sieve(limit):
 			for n in xrange(i*i, limit, i):     
 				a[n] = False
 
+def circular(n):
+	n = str(n)
+	for digit in n:
+		n = n[-1] + n[:-1]
+		if not is_prime(int(n)):
+			return False
+	return True
+
+def factorial(n):
+	product = 1
+	for i in xrange(1, n+1):
+		product *= i
+	return product
+
+
 

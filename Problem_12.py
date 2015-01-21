@@ -1,22 +1,17 @@
 # What is the value of the first triangle number to have over five hundred divisors?
 
-divisors = 500
-factors = []
+def factors(n):    
+    return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
 
-n = 0
-i = 0
+n = 28
+i = 8
 
 while True:
-	i += 1
 	n += i
-
-	factors = []
-	for d in range(1, n):
-		if n % d == 0:
-			factors.append(d)
-
-	if len(factors) == divisors:
+	i += 1
+	if len(factors(n)) > 500:
+		print n
 		break
 
-print factors
-print n
+
+

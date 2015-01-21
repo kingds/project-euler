@@ -5,8 +5,8 @@ def is_prime(n):
 		return False
 	elif n == 2:
 		return True
-	if n & 1:
-		return false
+	if not n & 1:
+		return False
 	sqr = int(n**(0.5)) + 1
 	for divisor in range(3, sqr, 2):
 		if n%divisor == 0:
@@ -22,6 +22,16 @@ def primes_sieve(limit):
 			yield i
 			for n in xrange(i*i, limit, i):     
 				a[n] = False
+
+def factors(n):    
+    return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
+
+def prime_factor_count(n):
+	count = 0
+	for f in factors(n):
+		if is_prime(f):
+			count += 1
+	return count    		
 
 def circular(n):
 	n = str(n)

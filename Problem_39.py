@@ -1,15 +1,17 @@
+# If p is the perimeter of a right triangle, and p <= 1000, which value of p gives the most possible triangles with integer length sides?
 
+max_solutions = 0
+p_max = 0
 
-a = ""
-i = 1
-while len(a) < 1000001:
-	a += str(i)
-	i += 1
+for p in range(3, 1001):
+	solutions = 0
+	for c in range(p - 3):
+		for b in range(1, c):
+			a = p - c - b
+			if a**2 + b**2 == c**2:
+				solutions += 1
+	if solutions > max_solutions:
+		max_solutions = solutions
+		p_max = p
 
-product = 1
-i = 1
-while i <= 1000000:
-	product *= int(a[i - 1])
-	i *= 10
-
-print product
+print p_max

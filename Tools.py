@@ -26,6 +26,13 @@ def primes_sieve(limit):
 def factors(n):    
     return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
 
+def prime_factors(n):
+	prime_factors = []
+	for f in factors(n):
+		if is_prime(f):
+			prime_factors.append(f)
+	return prime_factors
+
 def prime_factor_count(n):
 	count = 0
 	for f in factors(n):

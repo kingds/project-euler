@@ -23,5 +23,30 @@ def is_prime(n):
 			return False
 	return True
 
-def factors(n):    
-	return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
+MAX = 1000000
+
+primes = []
+for prime in primes_sieve(MAX):
+	primes.append(prime)
+
+max_total = 0
+max_length = 0
+for length in reversed(range(1, MAX)):
+	for i in range(len(primes)-length):
+		total = sum(primes[i : i+length])
+		if total > MAX:
+			break
+		if is_prime(total):
+			max_length = length
+			max_total = total
+			break
+	if max_length > 0:
+		break
+print max_total
+
+
+
+
+
+
+

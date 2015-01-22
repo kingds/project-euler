@@ -87,5 +87,10 @@ def permutations(iterable, r=None):
 		else:
 			return
 
+def palindrome(n):
+	for i in range(len(str(n))):
+		if str(n)[i] != str(n)[-i - 1]:
+			return False
+	return True
 
 

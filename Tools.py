@@ -93,4 +93,16 @@ def palindrome(n):
 			return False
 	return True
 
+def lychrel(n):
+	i = 0
+	while i < 50:
+		i += 1
+		n = int(str(n)) + int(str(n)[:: -1])
+		if palindrome(n):
+			return False
+	return True
+
+def digit_sum(n):
+	return sum(int(d) for d in str(n))
+
 

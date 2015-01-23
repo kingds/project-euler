@@ -9,67 +9,50 @@
 
 cipher = open("Problem_059_Cipher.txt").read().replace("\n", "").split(",")
 
-c_1 = []
+c1 = []
 p = 0
 while p < len(cipher):
-	c_1.append(cipher[p])
+	c1.append(cipher[p])
 	p += 3
 
-c_2 = []
+c2 = []
 p = 1
 while p < len(cipher):
-	c_2.append(cipher[p])
+	c2.append(cipher[p])
 	p += 3
 
-c_3 = []
+c3 = []
 p = 2
 while p < len(cipher):
-	c_3.append(cipher[p])
+	c3.append(cipher[p])
 	p += 3
 
-# for item in set(c_1):
-# 	print item, c_1.count(item)
-# print "fjsdfsdklsjldjghdfhdkljhsljdsl"
+c1_space = max(set(c1), key=c1.count)
+c2_space = max(set(c2), key=c2.count)
+c3_space = max(set(c3), key=c3.count)
 
-# for item in set(c_2):
-# 	print item, c_2.count(item)
-# print "fjsdfsdklsjldjghdfhdkljhsljdsl"
+ascii_character = 32
 
-# for item in set(c_3):
-# 	print item, c_3.count(item)
-# print "fjsdfsdklsjldjghdfhdkljhsljdsl"
+c1_key = int(c1_space) ^ ascii_character
+c2_key = int(c2_space) ^ ascii_character
+c3_key = int(c3_space) ^ ascii_character
 
-# c_1_space = 71
-# c_2_space = 79
-# c_3_space = 69
+decoded = ""
+keys = [c1_key, c2_key, c3_key]
+for i in range(len(cipher)):
+	decoded += chr(int(cipher[i]) ^ keys[i % 3])
 
-# for i in range(97, 123):
-# 	if c_1_space ^ i == 32:
-# 		print i
-# 		break
-
-# for i in range(97, 123):
-# 	if c_2_space ^ i == 32:
-# 		print i
-# 		break
-
-# for i in range(97, 123):
-# 	if c_3_space ^ i == 32:
-# 		print i
-# 		break
-
-c_1_key = 103
-c_2_key = 111
-c_3_key = 101
+print decoded
 
 total = 0
-for c in c_1:
-	total += int(c) ^ c_1_key
-for c in c_2:
-	total += int(c) ^ c_2_key
-for c in c_3:
-	total += int(c) ^ c_3_key
+for c in c1:
+	total += int(c) ^ c1_key
+for c in c2:
+	total += int(c) ^ c2_key
+for c in c3:
+	total += int(c) ^ c3_key
 
-print total
+print "ASCII Total: " + str(total)
+
 
 

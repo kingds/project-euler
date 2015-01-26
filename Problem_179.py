@@ -6,8 +6,6 @@ def factors(n):
 count = 0
 f_n_1 = len(factors(2))
 for n in range(2, 10**7):
-	print n
-	# print n
 	f_n = f_n_1
 	f_n_1 = len(factors(n+1))
 	if f_n == f_n_1:

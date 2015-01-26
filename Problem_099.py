@@ -9,11 +9,7 @@ for pair in pairs_raw:
 	pairs.append((int(split_pair[0]), int(split_pair[1])))
 
 
-new_pairs = pairs
-for a in range(len(pairs)):
-	for b in range(a):
-		if pairs[b][0] < pairs[a][0] and pairs[b][1] < pairs[a][1]:
-			new_pairs.remove(pairs[b])
+
 
 
 	

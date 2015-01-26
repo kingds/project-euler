@@ -96,6 +96,10 @@ def palindrome(n):
 			return False
 	return True
 
+def is_cube(n):
+	root = n**(1/3.0)
+	return int(root + 0.5) ** 3.0 == n
+
 def lychrel(n):
 	i = 0
 	while i < 50:

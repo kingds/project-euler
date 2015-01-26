@@ -31,17 +31,19 @@ def roman_to_int(r):
 
 numerals = open("Problem_089_Roman.txt").read().split("\n")
 
-original_length = len("".join(numerals))
+# original_length = len("".join(numerals))
 
-new_length = 0
+# new_length = 0
+# for r in numerals:
+# 	new_length += len(int_to_roman(roman_to_int(r)))
+
+# print original_length
+# print new_length
+# print original_length - new_length
+
 for r in numerals:
-	new_length += len(int_to_roman(roman_to_int(r)))
+	if int_to_roman(roman_to_int(r)) != r:
+		print roman_to_int(r), r, int_to_roman(roman_to_int(r))
 
-print original_length
-print new_length
-print original_length - new_length
-
-# for r in numerals[0 : 20]:
-# 	print roman_to_int(r), r, int_to_roman(roman_to_int(r))
 
 

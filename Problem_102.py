@@ -30,7 +30,7 @@ def contains_origin(t):
 		pass
 
 	try:
-		m3 = (p1[1] - p2[1]) / (p1[0] - p3[0])
+		m3 = (p1[1] - p3[1]) / (p1[0] - p3[0])
 		b3 = p1[1] - (m3 * p1[0])
 		if p1[1] <= b3 <= p3[1] or p3[1] <= b3 <= p1[1]:
 			y_intercepts.append(b3)	

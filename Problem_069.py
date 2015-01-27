@@ -10,32 +10,35 @@ def prime_factors(n):
 			prime_factors.append(f)
 	return prime_factors
 
+def is_prime(n):
+	if n < 2:
+		return False
+	elif n == 2:
+		return True
+	if not n & 1:
+		return False
+	sqr = int(n**(0.5)) + 1
+	for divisor in range(3, sqr, 2):
+		if n%divisor == 0:
+			return False
+	return True
+
 def totient(n):
-	f = sorted(list(factors(n)))
-	non_coprimes = []
-	for i in range(1, len(f)):
-		a = f[i]
-		b = a
-		while b < n:
-			non_coprimes.append(b)
-			b += a
-	coprimes = [1]
-	for i in range(2, n):
-		if i not in non_coprimes:
-			coprimes.append(i)
-	return len(coprimes)
+	for p in prime_factors(n):
+		n *= (1 - 1.0/p)
+	return int(n)
 
-cube_dict = {}
-for n in range(10000):
-	cube = n**3
-	digits = "".join(sorted(str(cube)))
-	try:
-		cube_dict[digits].append(n)
-	except KeyError:
-		cube_dict[digits] = [n]
+max_n = 0
+max_ratio = 0
+for n in range(1, 1000000):
+	ratio = float(n) / totient(n)
+	if ratio > max_ratio:
+		max_n = n
+		max_ratio = ratio
 
-for d in sorted(cube_dict.keys()):
-	if len(cube_dict[d]) == 5:
-		print min(cube_dict[d]) ** 3
+print max_n
+
+
+
 
 

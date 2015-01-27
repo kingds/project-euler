@@ -14,4 +14,3 @@ for d in range(2, 12001):
 			fractions.append(f)
 
 print len(set(fractions))
-# print fractions

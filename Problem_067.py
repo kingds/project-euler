@@ -3,7 +3,7 @@
 import itertools
 
 # Create the triangle list from the raw values
-triangle_raw = open("Problem_018_Triangle.txt").read()
+triangle_raw = open("Problem_067_Triangle.txt").read()
 triangle_rows = triangle_raw.split("\n")
 triangle = []
 for row in triangle_rows:
@@ -11,7 +11,7 @@ for row in triangle_rows:
 
 
 max_total = 0
-for path in range(2**14):
+for path in xrange(2**14):
 	position = 0
 	total = int(triangle[0][0])
 	for row in range(14):

@@ -12,3 +12,11 @@ for a in range(0, 201, 200):
 						for g in range(f, 201, 2):
 							count += 1
 print count
+
+
+coins = [200, 100, 50, 20, 10, 5, 2, 1]
+
+count = 0
+
+def recurse(coin):
+	for coin in coins:

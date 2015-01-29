@@ -48,79 +48,28 @@ def permutations(iterable, r=None):
 		else:
 			return
 
-
-# for a in primes_sieve(1000):
-# 	print a
-# 	for b in primes_sieve(1000):
-# 		for c in primes_sieve(1000):
-# 			if b < a:
-# 				break
-# 			for d in primes_sieve(1000):
-# 				if c < b:
-# 					break
-# 				if d > c:
-# 					all_prime = True
-# 					for p in permutations([a, b, c, d], r=2):
-# 						if not is_prime(int(str(p[0]) + str(p[1]))):
-# 							all_prime = False
-# 							break
-# 					if all_prime:
-# 						print a, b, c, d
-# 						quit()
-
-two_sets = []
-for b in primes_sieve(3000):
-	print "B: ", b
-	for a in primes_sieve(b):
-		if is_prime(int(str(a) + str(b))):
-			if is_prime(int(str(b) + str(a))):
-				two_sets.append([a, b])
+def concat_prime(a, b):
+	if not is_prime(int(str(a) + str(b))):
+		return False
+	if not is_prime(int(str(b) + str(a))):
+		return False
+	return True
 
 
-three_sets = []
-for c in primes_sieve(3000):
-	print "C: ", c
-	for t in two_sets:
-		if c > t[1]:
-			all_prime = True
-			for p in permutations([t[0], t[1], c], r=2):
-				if not is_prime(int(str(p[0]) + str(p[1]))):
-					all_prime = False
-					break
-			if all_prime:
-				three_sets.append([t[0], t[1], c])
-
-four_sets = []
-for d in primes_sieve(15000):
-	print "D: ", d
-	for t in three_sets:
-		if d > t[2]:
-			all_prime = True
-			for p in permutations([t[0], t[1], t[2], d], r=2):
-				if not is_prime(int(str(p[0]) + str(p[1]))):
-					all_prime = False
-					break
-			if all_prime:
-				# print t[0], t[1], t[2], d
-				four_sets.append([t[0], t[1], t[2], d])
-
-print four_sets
-
-for e in primes_sieve(100000):
-	print "E: ", e
-	for f in four_sets:
-		if e > f[3]:
-			all_prime = True
-			for p in permutations([f[0], f[1], f[2], f[3], e], r=2):
-				if not is_prime(int(str(p[0]) + str(p[1]))):
-					all_prime = False
-					break
-			if all_prime:
-				print f[0], f[1], f[2], f[3], e
-				print sum([f[0], f[1], f[2], f[3], e])
-				quit()
-
-
+for a in primes_sieve(10000):
+	concat = [a]
+	for b in primes_sieve(10000):
+		if len(concat) == 5:
+			print concat
+			print sum(concat)
+			quit()
+		match = True
+		for c in concat:
+			if not concat_prime(b, c):
+				match = False
+				break
+		if match:
+			concat.append(b)
 
 
 			

@@ -9,6 +9,11 @@ triangle = []
 for row in triangle_rows:
 	triangle.append(row.split(" "))
 
+sub_triangles = []
+for i in range(len(triangle_rows) / 5):
+	
+
+
 
 max_total = 0
 for path in xrange(2**14):

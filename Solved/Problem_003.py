@@ -16,18 +16,20 @@ def is_prime(number):
 			i += 2
 	return True
 
-divisor = 3
+if __name__ == "__main__"
 
-while True:
-	if is_prime(divisor):
-		if n % divisor == 0:
-			n = n / divisor
-			if n == 1:
-				break
-			factor = n
-	divisor += 2
+	divisor = 3
 
-print factor
+	while True:
+		if is_prime(divisor):
+			if n % divisor == 0:
+				n = n / divisor
+				if n == 1:
+					break
+				factor = n
+		divisor += 2
+
+	return factor
 	
 
 

@@ -1,22 +1,18 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 
-a = 999
-b = 999
-palindrome = 0
+def main():
+    palindrome = 0
+    for a in range(999, 100, -1):
+        for b in range(999, a, -1):
+            product = str(a * b)
+            if product == product[::-1]:
+                if int(product) > palindrome:
+                    palindrome = int(product)
+                else:
+                    break
 
-for a in reversed(range(100, 999)):
+    return palindrome
 
-	for b in reversed(range(100, 999)):
+if __name__ == "__main__":
 
-		product = str(a * b)
-
-		if product == product[::-1]:
-			if int(product) > palindrome:
-				palindrome = int(product)
-
-print palindrome
-
-
-
-
-
+    print main()

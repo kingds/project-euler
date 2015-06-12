@@ -1,28 +1,24 @@
 # What is the 10 001st prime number?
 
-def is_prime(number):
-	if number == 2:
-		return True
-	elif number % 2 == 0:
-		return False
-	else:
-		i = 3
-		while i < number/2:
-			if number % i == 0:
-				return False
-			i += 2
-	return True
+def primes_sieve(limit):
+    a = [True] * limit                          
+    a[0] = a[1] = False
 
-n = 10001
-count = 0
-i = 2
+    for (i, isprime) in enumerate(a):
+        if isprime:
+            yield i
+            for n in xrange(i*i, limit, i):     
+                a[n] = False
 
-while count != n:
-	if is_prime(i):
-		count += 1
-	i += 1
+def main():
+    count = 0
+    for prime in primes_sieve(10**6):
+        count += 1
+        if count == 10001:
+            return prime
 
+if __name__ == "__main__":
 
-print i-1
+    print main()
 
 

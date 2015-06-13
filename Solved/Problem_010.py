@@ -1,25 +1,23 @@
 # Find the sum of all the primes below two million.
 
-def is_prime(n):
-	if n < 2:
-		return False
-	elif n == 2:
-		return True
-	sqr = int(n**(0.5)) + 1
-	for divisor in range(3, sqr, 2):
-		if n%divisor == 0:
-			return False
-	return True
+def primes_sieve(limit):
+    a = [True] * limit                          
+    a[0] = a[1] = False
 
-total= 2
+    for (i, isprime) in enumerate(a):
+        if isprime:
+            yield i
+            for n in xrange(i*i, limit, i):     
+                a[n] = False
 
-for i in range(3, 2000000, 2):
-	if is_prime(i):
-		total += i
+def main():
+    sum = 0
+    for prime in primes_sieve(2000000):
+        sum += prime
 
-print total
+    return sum
 
 
+if __name__ == "__main__":
 
-
-
+    print main()

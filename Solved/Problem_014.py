@@ -1,25 +1,33 @@
 # Which starting number, under one million, produces the longest Collatz chain?
 
-def create_chain(starting_value):
-	n = starting_value
-	chain = [n]
-	while n != 1:
-		if n % 2 == 0:
-			n = n/2
-		else:
-			n = (3*n) + 1
-		chain.append(n)
-	return chain
+def main():
+    tested = {1: 1}
+    max_length = 0
+    max_n = 0
+    for n in range(2, 1000000):
+        starting_n = n
+        length = 1
+        while n != 1:
+            if n % 2 == 0:
+                n = n // 2
+            else:
+                n = (3 * n) + 1
+            tested_value = tested.get(n)
+            if tested_value: 
+                length += tested_value
+                tested[starting_n] = length
+                break
+            else:
+                length += 1
+        tested[starting_n] = length
+        if length > max_length:
+            max_length = length
+            max_n = starting_n
 
-max_length = 0
-max_starting_value = 0
+    return max_n
 
-for i in range(1, 1000000):
-	# print i
-	chain = create_chain(i)
-	if len(chain) > max_length:
-		max_length = len(chain)
-		max_starting_value = i
 
-print max_starting_value
+if __name__ == "__main__":
+
+    print main()
 

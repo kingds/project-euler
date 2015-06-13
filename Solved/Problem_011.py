@@ -6,66 +6,84 @@ grid_list = grid_string.split(" ")
 rows = []
 
 for i in range(20):
-	rows.append(grid_list[i*20 : (i*20)+20])
-	i += 20
+    rows.append(grid_list[i*20 : (i*20)+20])
+    i += 20
 
-def horizontal(rows):
-	max_product = 0
-	products = []
-	for row in rows:
-		for i in range(17):
-			subset = row[i : i+4]
-			product = 1
-			for n in subset:
-				product *= int(n)
-			products.append(product)
-	return products
+def setup_grid():
+    grid = []
+    with open("Problem_011_Grid.txt") as grid_file:
+        for i in range(20):
+            grid.append(grid_file.readline().split(" "))
+    return grid
 
-def vertical(rows):
-	max_product = 0
-	products = []
-	for i in range(17):
-		for column in range(20):
-			product = 1
-			product *= int(rows[i][column])
-			product *= int(rows[i+1][column])
-			product *= int(rows[i+2][column])
-			product *= int(rows[i+3][column])
-			products.append(product)
-	return products
 
-def diagonal_1(rows):
-	max_product = 0
-	products = []
-	for i in range(17):
-		for column in range(17):
-			product = 1
-			product *= int(rows[i][column])
-			product *= int(rows[i+1][column+1])
-			product *= int(rows[i+2][column+2])
-			product *= int(rows[i+3][column+3])
-			products.append(product)
-	return products
+def horizontal(grid):
+    max_product = 0
+    products = []
+    for row in grid:
+        for i in range(17):
+            subset = row[i : i+4]
+            product = 1
+            for n in subset:
+                product *= int(n)
+            products.append(product)
+    return products
 
-def diagonal_2(rows):
-	max_product = 0
-	products = []
-	for i in range(3, 20):
-		for column in range(17):
-			product = 1
-			product *= int(rows[i][column])
-			product *= int(rows[i-1][column+1])
-			product *= int(rows[i-2][column+2])
-			product *= int(rows[i-3][column+3])
-			products.append(product)
-	return products
+def vertical(grid):
+    max_product = 0
+    products = []
+    for i in range(17):
+        for column in range(20):
+            product = 1
+            product *= int(grid[i][column])
+            product *= int(grid[i+1][column])
+            product *= int(grid[i+2][column])
+            product *= int(grid[i+3][column])
+            products.append(product)
+    return products
 
-h = max(horizontal(rows))
-v = max(vertical(rows))
-d_1 = max(diagonal_1(rows))
-d_2 = max(diagonal_2(rows))
+def diagonal_1(grid):
+    max_product = 0
+    products = []
+    for i in range(17):
+        for column in range(17):
+            product = 1
+            product *= int(grid[i][column])
+            product *= int(grid[i+1][column+1])
+            product *= int(grid[i+2][column+2])
+            product *= int(grid[i+3][column+3])
+            products.append(product)
+    return products
 
-print max([h, v, d_1, d_2])
+def diagonal_2(grid):
+    max_product = 0
+    products = []
+    for i in range(3, 20):
+        for column in range(17):
+            product = 1
+            product *= int(grid[i][column])
+            product *= int(grid[i-1][column+1])
+            product *= int(grid[i-2][column+2])
+            product *= int(grid[i-3][column+3])
+            products.append(product)
+    return products
+
+def main():
+
+    grid = setup_grid()
+    h = max(horizontal(grid))
+    v = max(vertical(grid))
+    d_1 = max(diagonal_1(grid))
+    d_2 = max(diagonal_2(grid))
+
+    return max([h, v, d_1, d_2])
+
+
+if __name__ == "__main__":
+
+    print main()
+
+
 
 
 

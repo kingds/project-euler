@@ -2,9 +2,14 @@
 
 from math import factorial
 
-grid_size = 20
+def main():
+    grid_size = 20
+    paths = factorial(2 * grid_size) / (factorial(grid_size))**2
 
-paths = factorial(2 * grid_size) / (factorial(grid_size))**2
+    return paths
 
-print paths
+
+if __name__ == "__main__":
+
+    print main()
 

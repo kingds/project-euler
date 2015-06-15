@@ -1,33 +1,44 @@
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
 def factors(n):    
-	factor_list = reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))
-	factor_list.remove(n)
-	factor_list = list(set(factor_list))
-	return factor_list
+    factor_list = reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0))
+    return list(set(factor_list))
 
-def factor_sum(n):
-	return sum(factors(n))
+def abundant(n):
+    return sum(factors(n)) - n > n
 
-abundant_numbers = []
-for i in range(12, 28124):
-	if factor_sum(i) > i:
-		abundant_numbers.append(i)
+def sum_between(a, b):
+    return int(0.5 * (b + a) * (b - a + 1)) - b - a
 
-print abundant_numbers
+def main():
+    # Create a list of abundant numbers and sums
+    n = 12
+    sums = []
+    abundants = []
+    while n < 20162:
+        if abundant(n):
+            abundants.append(n)
+            for a in abundants:
+                sum = a + n 
+                if sum > 20162:
+                    break
+                sums.append(a + n)
+        n += 1
 
-total = 0
-for n in range(28124):
-	print n
-	for a in abundant_numbers:
-		if a > n/2 + 1:
-			total += n
-			break
-		try:
-			abundant_numbers.index(n-a)
-			break
-		except Exception:
-			pass
+    # Sort the list
+    sums = sorted(list(set(sums)))
+    sums.insert(0, 0)
 
-print total
+    # Calculate the total of all integers not in the sums list
+    total = 0
+    for i in range(len(sums) - 1):
+        if sums[i] > 28124:
+            break
+        total += sum_between(sums[i], sums[i+1])
 
+    return total
+
+
+if __name__ == "__main__":
+
+    print main()

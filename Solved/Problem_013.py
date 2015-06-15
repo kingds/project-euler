@@ -2,12 +2,7 @@
 
 def main():
     numbers = open("Problem_013_Numbers.txt").read().split("\n")
-    sum = 0
-    for number in numbers:
-        sum += int(number)
-
-    return int(str(sum)[0:10])
-
+    return int(str(reduce(lambda x, y: int(x) + int(y), numbers))[0:10])
 
 if __name__ == "__main__":
 

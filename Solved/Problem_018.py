@@ -8,7 +8,7 @@ def main():
     for row in triangle_rows:
         triangle.append(row.split(" "))
 
-
+    # Calculate the maximum total
     max_total = 0
     for path in range(2**14):
         position = 0

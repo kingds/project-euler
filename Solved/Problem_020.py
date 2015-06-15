@@ -1,15 +1,13 @@
 # Find the sum of the digits of 100!
 
 def factorial_digit_sum(n):
-	n_fac = 1
-	for i in range(1, n+1):
-		n_fac *= i
-	digit_sum = 0
-	n_fac_string = str(n_fac)
-	for i in range(len(n_fac_string)):
-		digit_sum += int(n_fac_string[i])
+    n_factorial = reduce(lambda x, y: x*y, range(1, n+1))
+    return reduce(lambda x, y: x+y, [int(a) for a in str(n_factorial)])
 
-	return digit_sum
+def main():
+    return factorial_digit_sum(100)
 
-print factorial_digit_sum(100)
 
+if __name__ == "__main__":
+
+    print main()

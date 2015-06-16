@@ -1,32 +1,25 @@
 # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
-def permutations(iterable, r=None):
-    # permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
-    # permutations(range(3)) --> 012 021 102 120 201 210
-    pool = tuple(iterable)
-    n = len(pool)
-    r = n if r is None else r
-    if r > n:
-        return
-    indices = range(n)
-    cycles = range(n, n-r, -1)
-    yield tuple(pool[i] for i in indices[:r])
-    while n:
-        for i in reversed(range(r)):
-            cycles[i] -= 1
-            if cycles[i] == 0:
-                indices[i:] = indices[i+1:] + indices[i:i+1]
-                cycles[i] = n - i
-            else:
-                j = cycles[i]
-                indices[i], indices[-j] = indices[-j], indices[i]
-                yield tuple(pool[i] for i in indices[:r])
-                break
-        else:
-            return
+def factorial(n):
+	if n == 0:
+		return 1
+	return reduce(lambda x,y: x*y, range(1, n+1))
+
+def main():
+	digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	remaining = 999999
+	answer = ""
+	while len(digits) > 0:
+		permutations = factorial(len(digits))
+		i = int(float(remaining) / float(permutations) * float(len(digits)))
+		d = digits[i]
+		remaining -= int((float(i) / float(len(digits))) * permutations)
+		digits.remove(d)
+		answer += d
+
+	return int(answer)
 
 
-permutations = list(permutations("0123456789"))
-permutations.sort()
+if __name__ == "__main__":
 
-print "".join(permutations[999999])
+    print main()

@@ -1,15 +1,12 @@
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
-total_total = 0
+# (9**5)*6 = 354295. (9**5)*7=413343. So it's not possible for the number to be greater than 354295.
 
-for i in range(2, 354295):
-	total = 0
-	for digit in str(i):
-		total += int(digit) ** 5
-	if total == i:
-		print i
-		total_total += i
+def main():
 
-print total_total
+    return reduce(lambda x,y:x+y, [a for a in range(2, 354295) if a == reduce(lambda x, y: x+y, [int(d)**5 for d in str(a)])])
 
 
+if __name__ == "__main__":
+
+    print main()

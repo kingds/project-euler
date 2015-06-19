@@ -9,7 +9,7 @@ from timeout import Timeout
 from supress_print import Supress
 
 # Set up the solutions directory
-solved_dir = "../Solved/"
+solved_dir = "../solved/"
 sys.path.append(solved_dir)
 os.chdir(solved_dir)
 
@@ -22,7 +22,7 @@ if len(sys.argv) > 1:
 
 # Use all solutions if no command line parameters exist
 else:
-    solutions = [filename[:-3] for filename in os.listdir(solved_dir) if filename[-3:] == ".py"]
+    solutions = sorted([filename[:-3] for filename in os.listdir(solved_dir) if filename[-3:] == ".py"])
 
 # Test each solution against the answer
 for solution in solutions:

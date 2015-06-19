@@ -12,7 +12,6 @@ def main():
 	checked_combos = []
 	total = 0
 	for n in xrange(3, 7*factorial(9)):
-		# print n
 		unique_list = sorted(str(n))
 		if not unique_list in checked_combos:
 			checked_combos.append(unique_list)

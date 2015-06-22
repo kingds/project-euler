@@ -16,12 +16,6 @@ def main():
 	return p_max
 
 
-# def main():
-# 	triples_dict = {}
-# 	for a in range(1, 500):
-# 		for b in range(a, 500):
-# 			c = (a**2 + b)
-
 if __name__ == "__main__":
 
 	print main()

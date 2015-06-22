@@ -1,29 +1,29 @@
 # How many words in Problem_42_Words.txt are triangle words?
 
-words = open("Problem_42_Words.txt").read().replace('"', "").split(",")
-
 def word_score(word):
-	letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	score = 0
-	word = word.upper()
-	for l in word:
-		score += letters.index(l) + 1
-	return score
+    return sum("ABCDEFGHIJKLMNOPQRSTUVWXYZ".find(letter) + 1 for letter in word.upper())
 
 def triangle_numbers(limit):
-	triangle_numbers = []
-	n = 1
-	t = 0
-	while t < limit:
-		t = int(0.5*n*(n+1))
-		triangle_numbers.append(t)
-		n += 1
-	return triangle_numbers
+    triangle_numbers = []
+    n = 1
+    t = 0
+    while t < limit:
+        t = int(0.5*n*(n+1))
+        triangle_numbers.append(t)
+        n += 1
+    return triangle_numbers
 
-t = triangle_numbers(1000)
-count = 0
-for w in words:
-	if word_score(w) in t:
-		count += 1
+def main():
+    words = open("Problem_042_Words.txt").read().replace('"', "").split(",")
+    triangle_list = triangle_numbers(max(len(word) for word in words) * 26)
+    count = 0
+    for word in words:
+        if word_score(word) in triangle_list:
+            count += 1
 
-print count
+    return count
+
+
+if __name__ == "__main__":
+
+    print main()

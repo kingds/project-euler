@@ -1,56 +1,50 @@
-def permutations(iterable, r=None):
-	# permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
-	# permutations(range(3)) --> 012 021 102 120 201 210
-	pool = tuple(iterable)
-	n = len(pool)
-	r = n if r is None else r
-	if r > n:
-		return
-	indices = range(n)
-	cycles = range(n, n-r, -1)
-	yield tuple(pool[i] for i in indices[:r])
-	while n:
-		for i in reversed(range(r)):
-			cycles[i] -= 1
-			if cycles[i] == 0:
-				indices[i:] = indices[i+1:] + indices[i:i+1]
-				cycles[i] = n - i
-			else:
-				j = cycles[i]
-				indices[i], indices[-j] = indices[-j], indices[i]
-				yield tuple(pool[i] for i in indices[:r])
-				break
-		else:
-			return
 
-def primes_sieve(limit):
-	a = [True] * limit                          
-	a[0] = a[1] = False
+def possibly_pandigital(n):
+    return len(set(str(n))) == len(str(n))
+    return sorted(set(str(n)))
 
-	for (i, isprime) in enumerate(a):
-		if isprime:
-			yield i
-			for n in xrange(i*i, limit, i):     
-				a[n] = False
+def definitely_pandigital(n):
+    return sorted(set(str(n))) == [str(i) for i in range(10)]
 
+def main():
+    total = 0
+    for a in range(17, 1000, 17):
+        if not possibly_pandigital(a):
+            continue
+        for b in range(10):
+            b = a + b*10**3
+            if (b / 10**1) % 13 != 0 or not possibly_pandigital(b):
+                continue
+            for c in range(10):
+                c = b + c*10**4
+                if (c / 10**2) % 11 != 0 or not possibly_pandigital(c):
+                    continue
+                for d in range(10):
+                    d = c + d*10**5
+                    if (d / 10**3) % 7 != 0 or not possibly_pandigital(d):
+                        continue
+                    for e in range(10):
+                        e = d + e*10**6
+                        if (e / 10**4) % 5 != 0 or not possibly_pandigital(e):
+                            continue
+                        for f in range(10):
+                            f = e + f*10**7
+                            if (f / 10**5) % 3 != 0 or not possibly_pandigital(f):
+                                continue
+                            for g in range(10):
+                                g = f + g*10**8
+                                if (g / 10**6) % 2 != 0 or not possibly_pandigital(g):
+                                    continue
+                                for h in range(10):
+                                    h = g + h*10**9
+                                    if not definitely_pandigital(h):
+                                        continue
+                                    total += h
 
-sum = 0
-good_pans = []
-for pan in permutations("0123456789"):
-	pan = "".join(pan)
-	if len(str(int(pan))) == 10:
-		i = 1
-		good_pan = True
-		for prime in primes_sieve(18):
-			if int(pan[i:i+3]) % prime != 0:
-				good_pan = False
-				break
-			i += 1
-		if good_pan:
-			sum += int(pan)
-			good_pans.append(pan)
-
-print good_pans
-print sum
+    return total
 
 
+
+if __name__ == "__main__":
+
+    print main()

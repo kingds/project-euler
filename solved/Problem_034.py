@@ -6,16 +6,20 @@ def factorial(n):
         product *= i
     return product
 
-
 def main():
     digit_factorials = [factorial(n) for n in range(10)]
-    checked_combos = []
+    checked = {}
     total = 0
-    for n in xrange(3, 7*factorial(9)):
-        unique_list = sorted(str(n))
-        if not unique_list in checked_combos:
-            checked_combos.append(unique_list)
-            if n == sum([digit_factorials[int(d)] for d in str(n)]):
+    for n in xrange(3, 50000):
+        unique_string = "".join(sorted(str(n)))
+        checked_sum = checked.get(unique_string)
+        if checked_sum:
+            if n == checked_sum:
+                total += n
+        else:
+            n_sum = sum(digit_factorials[int(d)] for d in str(n))
+            checked[unique_string] = n_sum
+            if n == n_sum:
                 total += n
 
     return total
@@ -24,4 +28,3 @@ def main():
 if __name__ == "__main__":
     
     print main()
-

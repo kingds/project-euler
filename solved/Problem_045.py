@@ -1,30 +1,22 @@
 # Find the next triagonal number after T-285 that is also pentagonal and hexagonal
 
-def triagonal(n):
-	return n*(n+1)//2
+def triangular(n):
+    return n*(n+1)//2
 
-def pentagonal(n):
-	return n*(3*n - 1)//2
+def is_pentagonal(n):
+    return ((((24*n) + 1)**0.5 + 1) / 6).is_integer()
 
-def hexagonal(n):
-	return n*(2*n - 1)
+def is_hexagonal(n):
+    return (((8*n + 1)**0.5 + 1) / 4).is_integer()
 
 def main():
-	n = 143
-	t = []
-	p = []
-	h = []
-
-	while True:
-		t_n = int(0.5*n*(n+1))
-		if t_n in p and t_n in h and t_n != 40755:
-			print t_n
-			break
-		p.append(int(0.5*n*(3*n - 1)))
-		h.append(int(n*(2*n-1)))
-		t.append(t_n)
-		n += 1
+    n = 286
+    while True:
+        t = triangular(n)
+        if is_hexagonal(t) and is_pentagonal(t):
+            return t
+        n += 1
 
 if __name__ == "__main__":
 
-	print main()
+    print main()

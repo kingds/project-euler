@@ -23,47 +23,17 @@ def prime_factor_count(n):
             count += 1
     return count
 
-def four_prime_factors(n):
-    count = 0
-    for i in range(1, int(n**0.5) + 1):
-        if n % i == 0:
-            if is_prime(i):
-                count += 1
-        if count == 4:
-            return True
-    return False
-
 def main(): 
     n = 0
     count = 0
     while True:
         n += 1
-        if four_prime_factors(n):
+        if prime_factor_count(n) == 4:
             count += 1
         else: 
             count = 0
         if count == 4:
             return n - 3
-
-# def main():
-#     products = []
-#     primes = list(primes_sieve(100))
-#     for a in range(len(primes)):
-#         for b in range(len(primes)):
-#             for c in range(len(primes)):
-#                 for d in range(len(primes)):
-#                     products.append(primes[a] * primes[b] * primes[c] * primes[d])
-#     products = sorted(list(set(products)))
-
-#     count = 0
-#     for i in range(len(products)):
-#         print products[i]
-#         if products[i+1] - products[i] == 1:
-#             count += 1
-#         else:
-#             count = 0
-#         if count == 4:
-#             return products[i-3]
 
 
 if __name__ == "__main__":

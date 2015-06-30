@@ -24,28 +24,32 @@ def is_prime(n):
     return True
 
 def main():
-
-    MAX = 1000000
-
-    primes = []
-    for prime in primes_sieve(MAX):
-        primes.append(prime)
-
-    max_total = 0
-    max_length = 0
-    for length in reversed(range(1, MAX)):
-        for i in range(len(primes)-length):
-            total = sum(primes[i : i+length])
-            if total > MAX:
+    limit = 5000
+    primes = list(primes_sieve(limit))
+    max_count = 0
+    max_prime = 0
+    while True:
+        i = 0
+        total = 0
+        count = 0
+        while i < len(primes):
+            total += primes[i]
+            count += 1
+            if total > 1000000:
                 break
+            i += 1
+        while i < len(primes):
             if is_prime(total):
-                max_length = length
-                max_total = total
+                if count > max_count:
+                    max_count = count
+                    max_prime = total
                 break
-        if max_length > 0:
-            break
-    
-    return max_total
+            total -= primes[i]
+            count -= 1
+            i -= 1
+        if len(primes) == 1:
+            return max_prime
+        primes.pop(0)
 
 
 if __name__ == "__main__":

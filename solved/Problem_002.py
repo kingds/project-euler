@@ -1,25 +1,14 @@
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 def main():
+    total = 0
+    (a, b) = (1, 2)
+    while b < 4000000:
+        (a, b) = (b, a+b)
+        if a%2 == 0:
+            total += a
 
-    a = 1
-    b = 1
-
-    sum = 0
-
-    while True:
-
-        c = a + b
-        a = b
-        b = c
-
-        if b%2 == 0:
-            sum += b
-
-        if b > 4000000:
-            break
-
-    return sum
+    return total
 
 if __name__ == "__main__":
 

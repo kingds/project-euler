@@ -54,6 +54,11 @@ answers = {
 "Problem_052":142857,
 "Problem_053":4075,
 "Problem_055":249,
+"Problem_056":972,
+"Problem_057":153,
+"Problem_058":26241,
+"Problem_059":107359,
+"Problem_060":26033,
 
 
 }

@@ -1,11 +1,10 @@
 # File poker.txt contains 1000 poker hands. First five cards are player 1. Next five are player 2.
 # How many hands does player 1 win?
 
-hands = []
-for hand in open("Problem_054_Poker.txt").read().split("\n"):
-	hands.append(hand.split(" "))
-
 order = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+
+def sort_hand(hand):
+	return sorted(hand, key=lambda card: order.index(card[:-1]))
 
 def royal_flush(hand):
 	p1 = sort_hand(hand[:5])
@@ -158,8 +157,6 @@ def three_kind(hand):
 	elif results.count(True) == 2:
 		if order.index(p1[-3][:-1]) > order.index(p2[-3][:-1]):
 			return 1
-		elif order.index(p1[-3][:-1]) == order.index(p2[-3][:-3]):
-			print hand
 		else:
 			return 2
 
@@ -189,8 +186,6 @@ def two_pair(hand):
 	elif results.count(True) == 2:
 		if pair_values[0] > pair_values[1]:
 			return 1
-		elif pair_values[0] == pair_values[1]:
-			print hand
 		else:
 			return 2
 
@@ -218,13 +213,10 @@ def pair(hand):
 	elif results.count(True) == 2:
 		if pair_values[0] > pair_values[1]:
 			return 1
-		elif pair_values[0] == pair_values[1]:
-			print hand
 		else:
 			return 2
 
-def sort_hand(hand):
-	return sorted(hand, key=lambda card: order.index(card[:-1]))
+
 
 def winner(hand):
 	if royal_flush(hand) != 0:
@@ -244,6 +236,7 @@ def winner(hand):
 	if two_pair(hand) != 0:
 		return two_pair(hand)
 	if pair(hand) != 0:
+		print hand
 		return pair(hand)
 	p1 = sort_hand(hand[:5])
 	p2 = sort_hand(hand[5:])
@@ -252,15 +245,25 @@ def winner(hand):
 	else:
 		return 2
 
-p1_wins = 0
-p2_wins = 0
-for hand in hands:
-	if winner(hand) == 1:
-		p1_wins += 1
-	elif winner(hand) == 2:
-		p2_wins += 1
+def main():
+	hands = []
+	for hand in open("Problem_054_Poker.txt").read().split("\n"):
+		hands.append(hand.split(" "))
+	order = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
+	p1_wins = 0
+	p2_wins = 0
+	for hand in hands:
+		if winner(hand) == 1:
+			p1_wins += 1
+		elif winner(hand) == 2:
+			p2_wins += 1
 
-print p1_wins, p2_wins
+	return p1_wins
+
+
+if __name__ == "__main__":
+
+	print main()
 
 
 

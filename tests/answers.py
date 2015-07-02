@@ -59,8 +59,10 @@ answers = {
 "Problem_058":26241,
 "Problem_059":107359,
 "Problem_060":26033,
-
-
+"Problem_061":28684,
+"Problem_062":127035954683,
+"Problem_063":49,
+"Problem_065":272,
 }
 
 # Returns a given answer

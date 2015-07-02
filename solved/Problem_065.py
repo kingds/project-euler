@@ -15,10 +15,16 @@ def e_fraction(n):
 		x = Fraction(1 / (x + j))
 	return x + 1
 
-total = 0
-for d in str(e_fraction(100)).split("/")[0]:
-	total += int(d)
+def main():
+	total = 0
+	for d in str(e_fraction(100)).split("/")[0]:
+		total += int(d)
 
-print total
+	return total
+
+
+if __name__ == "__main__":
+
+	print main()
 
 

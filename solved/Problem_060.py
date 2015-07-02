@@ -23,30 +23,6 @@ def primes_sieve(limit):
             for n in xrange(i*i, limit, i):     
                 a[n] = False
 
-def permutations(iterable, r=None):
-    # permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
-    # permutations(range(3)) --> 012 021 102 120 201 210
-    pool = tuple(iterable)
-    n = len(pool)
-    r = n if r is None else r
-    if r > n:
-        return
-    indices = range(n)
-    cycles = range(n, n-r, -1)
-    yield tuple(pool[i] for i in indices[:r])
-    while n:
-        for i in reversed(range(r)):
-            cycles[i] -= 1
-            if cycles[i] == 0:
-                indices[i:] = indices[i+1:] + indices[i:i+1]
-                cycles[i] = n - i
-            else:
-                j = cycles[i]
-                indices[i], indices[-j] = indices[-j], indices[i]
-                yield tuple(pool[i] for i in indices[:r])
-                break
-        else:
-            return
 
 def concat_prime(a, b):
     if not is_prime(int(str(a) + str(b))):
@@ -56,20 +32,42 @@ def concat_prime(a, b):
     return True
 
 def main():
-    for a in primes_sieve(10000):
-        concat = [a]
-        for b in primes_sieve(10000):
-            if len(concat) == 5:
-                return sum(concat)
-                quit()
-            match = True
-            for c in concat:
-                if not concat_prime(b, c):
-                    match = False
-                    break
-            if match:
-                concat.append(b)
+    # for a in primes_sieve(10000):
+    #     concat = [a]
+    #     for b in primes_sieve(10000):
+    #         if len(concat) == 5:
+    #             print concat
+    #             return sum(concat)
+    #         match = True
+    #         for c in concat:
+    #             if not concat_prime(b, c):
+    #                 match = False
+    #                 break
+    #         if match:
+    #             concat.append(b)
 
+
+    primes = list(primes_sieve(10000))
+    concat_dict = {}
+
+    for a in primes_sieve(50):
+        print a
+        concat_list = concat_dict.get(a)
+        if concat_list == None:
+            concat_list = []
+        for b in primes:
+            if concat_prime(a, b):
+                concat_list.append(b)
+        concat_dict[a] = concat_list
+
+
+    for a in concat_dict:
+        concat_list = 
+
+
+
+
+# [5701, 13, 5197, 6733, 8389]
 
 if __name__ == "__main__":
 

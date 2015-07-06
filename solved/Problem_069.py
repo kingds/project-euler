@@ -28,15 +28,21 @@ def totient(n):
 		n *= (1 - 1.0/p)
 	return int(n)
 
-max_n = 0
-max_ratio = 0
-for n in range(1, 1000000):
-	ratio = float(n) / totient(n)
-	if ratio > max_ratio:
-		max_n = n
-		max_ratio = ratio
+def main():
+	max_n = 0
+	max_ratio = 0
+	for n in range(1, 1000000):
+		ratio = float(n) / totient(n)
+		if ratio > max_ratio:
+			max_n = n
+			max_ratio = ratio
 
-print max_n
+	return max_n
+
+
+if __name__ == "__main__":
+
+	print main()
 
 
 

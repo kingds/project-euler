@@ -13,11 +13,11 @@ def primes_sieve(limit):
 def number_of_ways(total, values):
     if not values: 
         return 0
-    v, values = values[0], values[1:]
+    current_value, values = values[0], values[1:]
     count = 0 
-    if total % v == 0: 
+    if total % current_value == 0: 
         count = 1    
-    for amount in xrange(0, total, v):
+    for amount in xrange(0, total, current_value):
         count += number_of_ways(total - amount, values)    
     return count
 

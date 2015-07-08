@@ -6,6 +6,28 @@ order = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"]
 def sort_hand(hand):
 	return sorted(hand, key=lambda card: order.index(card[:-1]))
 
+def tie_breaker(p1_card_value, p2_card_value, p1_sorted_hand, p2_sorted_hand):
+	if order.index(p1_card_value) > order.index(p2_card_value):
+		return 1
+	elif order.index(p1_card_value) < order.index(p2_card_value):
+		return 2
+	else:
+		p1_max = 0
+		for card in p1_sorted_hand:
+			if card[:-1] != p1_card_value and order.index(card[:-1]) > p1_max:
+				p1_max = order.index(card[:-1])
+		p2_max = 0
+		for card in p2_sorted_hand:
+			if card[:-1] != p2_card_value and order.index(card[:-1]) > p2_max:
+				p2_max = order.index(card[:-1])
+		if p1_max > p2_max:
+			return 1
+		elif p1_max < p2_max: 
+			return 2
+		else:
+			return 0		
+
+
 def royal_flush(hand):
 	p1 = sort_hand(hand[:5])
 	p2 = sort_hand(hand[5:])
@@ -23,10 +45,7 @@ def royal_flush(hand):
 	elif results.count(True) == 0:
 		return 0
 	elif results.count(True) == 2:
-		if order.index(p1[-1][-1]) > order.index(p2[-1][-1]):
-			return 1
-		else:
-			return 2
+		return tie_breaker(p1[-1][:-1], order.index(p2[-1][:-1]), p1, p2)
 
 def straight_flush(hand):
 	p1 = sort_hand(hand[:5])
@@ -44,10 +63,7 @@ def straight_flush(hand):
 	elif results.count(True) == 0:
 		return 0
 	elif results.count(True) == 2:
-		if order.index(p1[-1][:-1]) > order.index(p2[-1][:-1]):
-			return 1
-		else:
-			return 2
+		return tie_breaker(p1[-1][:-1], order.index(p2[-1][:-1]), p1, p2)
 
 def four_kind(hand):
 	p1 = sort_hand(hand[:5])
@@ -71,7 +87,6 @@ def four_kind(hand):
 			return 1
 		else:
 			return 2
-
 
 def full_house(hand):
 	p1 = sort_hand(hand[:5])
@@ -211,11 +226,13 @@ def pair(hand):
 	elif results.count(True) == 0:
 		return 0
 	elif results.count(True) == 2:
-		if pair_values[0] > pair_values[1]:
-			return 1
-		else:
-			return 2
-
+		# if order.index(pair_values[0]) > order.index(pair_values[1]):
+		# 	print p1, p2, 1
+		# 	return 1
+		# elif order.index(pair_values[0]) < order.index(pair_values[1]):
+		# 	print p1, p2, 2
+		# 	return 2
+		return tie_breaker(pair_values[0], pair_values[1], p1, p2)
 
 
 def winner(hand):
@@ -236,13 +253,12 @@ def winner(hand):
 	if two_pair(hand) != 0:
 		return two_pair(hand)
 	if pair(hand) != 0:
-		print hand
 		return pair(hand)
 	p1 = sort_hand(hand[:5])
 	p2 = sort_hand(hand[5:])
 	if order.index(p1[-1][:-1]) > order.index(p2[-1][:-1]):
 		return 1
-	else:
+	elif order.index(p1[-1][:-1]) < order.index(p2[-1][:-1]):
 		return 2
 
 def main():
@@ -253,9 +269,10 @@ def main():
 	p1_wins = 0
 	p2_wins = 0
 	for hand in hands:
-		if winner(hand) == 1:
+		win_value = winner(hand)
+		if win_value == 1:
 			p1_wins += 1
-		elif winner(hand) == 2:
+		elif win_value == 2:
 			p2_wins += 1
 
 	return p1_wins
